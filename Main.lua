@@ -1,19 +1,19 @@
 -- [[ 1. THÔNG BÁO BẮT ĐẦU LOAD ]]
 pcall(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "★ mrghost hub ★",
-        Text = "Đang tải dữ liệu, vui lòng chờ...",
-        Duration = 4
+        Title = "★ MRGHOST HUB VIP ★",
+        Text = "⚡ Đang tải giao diện VIP Super Light...",
+        Duration = 3
     })
 end)
 
 -- [[ KHỐI LỆNH TẢI SCRIPT AN TOÀN ]]
 local success, err = pcall(function()
-    -- [[ MRGHOST HUB - EVADE | MAIN.LUA OFFICIAL 5-STAR RELEASE ]] --
     local Players = game:GetService("Players")
     local RunService = game:GetService("RunService")
     local UserInputService = game:GetService("UserInputService")
     local Lighting = game:GetService("Lighting")
+    local TweenService = game:GetService("TweenService")
     local LocalPlayer = Players.LocalPlayer
     local Camera = workspace.CurrentCamera
 
@@ -30,7 +30,7 @@ local success, err = pcall(function()
 
     local ActiveTracers = {}
 
-    -- HÀM KÉO DI CHUYỂN MENU (HỖ TRỢ MỌI THIẾT BỊ)
+    -- HÀM KÉO DI CHUYỂN MENU SIÊU MƯỢT
     local function makeDraggable(gui)
         local dragging, dragInput, dragStart, startPos
         gui.InputBegan:Connect(function(input)
@@ -56,157 +56,164 @@ local success, err = pcall(function()
 
     -- TẠO GUI CHÍNH
     local ScreenGui = Instance.new("ScreenGui")
-    ScreenGui.Name = "MrGhostHubEvade"
+    ScreenGui.Name = "MrGhostHubVIP"
     ScreenGui.ResetOnSpawn = false
     pcall(function() ScreenGui.Parent = game:GetService("CoreGui") end)
     if not ScreenGui.Parent then ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui") end
 
-    -- NÚT BẬT TẮT MENU 👻
+    -- NÚT BẬT TẮT MENU 👻 (LOGI CỰC CHẤT)
     local ToggleButton = Instance.new("TextButton", ScreenGui)
-    ToggleButton.Position = UDim2.new(0.05, 0, 0.3, 0); ToggleButton.Size = UDim2.new(0, 55, 0, 55)
-    ToggleButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30); ToggleButton.Text = "👻"; ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255); ToggleButton.TextSize = 22; ToggleButton.Font = Enum.Font.SourceSansBold
+    ToggleButton.Position = UDim2.new(0.04, 0, 0.28, 0); ToggleButton.Size = UDim2.new(0, 60, 0, 60)
+    ToggleButton.BackgroundColor3 = Color3.fromRGB(15, 15, 25); ToggleButton.Text = "👻"; ToggleButton.TextSize = 28; ToggleButton.Font = Enum.Font.FredokaOne
     makeDraggable(ToggleButton)
-    Instance.new("UICorner", ToggleButton).CornerRadius = UDim.new(0, 30)
+    Instance.new("UICorner", ToggleButton).CornerRadius = UDim.new(1, 0)
+    local ToggleStroke = Instance.new("UIStroke", ToggleButton)
+    ToggleStroke.Thickness = 3; ToggleStroke.Color = Color3.fromRGB(168, 85, 247)
 
-    -- KHUNG MENU CHÍNH
+    -- KHUNG MENU CHÍNH (GLASSMORPHISM STYLE)
     local MainFrame = Instance.new("Frame", ScreenGui)
-    MainFrame.Position = UDim2.new(0.35, 0, 0.2, 0); MainFrame.Size = UDim2.new(0, 330, 0, 385)
-    MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20); MainFrame.Visible = true
+    MainFrame.Position = UDim2.new(0.32, 0, 0.16, 0); MainFrame.Size = UDim2.new(0, 345, 0, 435)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(12, 12, 20); MainFrame.BackgroundTransparency = 0.1; MainFrame.Visible = true
     makeDraggable(MainFrame)
-    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 10)
-    local UIStroke = Instance.new("UIStroke", MainFrame)
-    UIStroke.Color = Color3.fromRGB(138, 43, 226); UIStroke.Thickness = 2
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 18)
+    
+    local MainStroke = Instance.new("UIStroke", MainFrame)
+    MainStroke.Color = Color3.fromRGB(168, 85, 247); MainStroke.Thickness = 2.5
 
-    -- TIÊU ĐỀ MENU
-    local Title = Instance.new("TextLabel", MainFrame)
-    Title.Size = UDim2.new(1, 0, 0, 45); Title.BackgroundTransparency = 1
-    Title.Text = "mrghost hub -evade"; Title.TextColor3 = Color3.fromRGB(138, 43, 226); Title.TextSize = 21; Title.Font = Enum.Font.FredokaOne
+    -- TIÊU ĐỀ MENU CHẤT CHƠI
+    local TitleFrame = Instance.new("Frame", MainFrame)
+    TitleFrame.Size = UDim2.new(1, 0, 0, 55); TitleFrame.BackgroundTransparency = 1
 
-    -- DANH SÁCH CHỨA NÚT CHỨC NĂNG
+    local Title = Instance.new("TextLabel", TitleFrame)
+    Title.Size = UDim2.new(1, 0, 0.7, 0); Title.BackgroundTransparency = 1
+    Title.Text = "★ MRGHOST HUB VIP ★"; Title.TextColor3 = Color3.fromRGB(236, 201, 255); Title.TextSize = 20; Title.Font = Enum.Font.FredokaOne
+
+    local SubTitle = Instance.new("TextLabel", TitleFrame)
+    SubTitle.Position = UDim2.new(0, 0, 0.62, 0); SubTitle.Size = UDim2.new(1, 0, 0.38, 0); SubTitle.BackgroundTransparency = 1
+    SubTitle.Text = "━━━━ Evade Cyber Edition ━━━━"; SubTitle.TextColor3 = Color3.fromRGB(168, 85, 247); SubTitle.TextSize = 11; SubTitle.Font = Enum.Font.FredokaOne
+
+    -- DANH SÁCH CUỘN
     local Scroll = Instance.new("ScrollingFrame", MainFrame)
-    Scroll.Size = UDim2.new(1, -20, 1, -55); Scroll.Position = UDim2.new(0, 10, 0, 48)
-    Scroll.BackgroundTransparency = 1; Scroll.ScrollBarThickness = 4
+    Scroll.Size = UDim2.new(1, -24, 1, -68); Scroll.Position = UDim2.new(0, 12, 0, 60)
+    Scroll.BackgroundTransparency = 1; Scroll.ScrollBarThickness = 3; Scroll.ScrollBarImageColor3 = Color3.fromRGB(168, 85, 247)
     local Layout = Instance.new("UIListLayout", Scroll)
-    Layout.Padding = UDim.new(0, 8); Layout.SortOrder = Enum.SortOrder.LayoutOrder
+    Layout.Padding = UDim.new(0, 10); Layout.SortOrder = Enum.SortOrder.LayoutOrder
 
-    -- BẢNG STATS & NÚT NHẢY CHUỘT TÚI 🦘
-    local StatsFrame = Instance.new("Frame", ScreenGui)
-    StatsFrame.Position = UDim2.new(0.65, 0, 0.18, 0); StatsFrame.Size = UDim2.new(0, 140, 0, 32)
-    StatsFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25); StatsFrame.BackgroundTransparency = 0.3
-    makeDraggable(StatsFrame)
-    Instance.new("UICorner", StatsFrame).CornerRadius = UDim.new(0, 8)
-
-    local StatsText = Instance.new("TextLabel", StatsFrame)
-    StatsText.Size = UDim2.new(1, 0, 1, 0); StatsText.BackgroundTransparency = 1
-    StatsText.Text = "Bị gục: 0"; StatsText.TextColor3 = Color3.fromRGB(255, 255, 255); StatsText.TextSize = 13; StatsText.Font = Enum.Font.FredokaOne
-
+    -- NÚT NHẢY CHUỘT TÚI 🦘 TRÊN MÀN HÌNH
     local QuickJumpButton = Instance.new("TextButton", ScreenGui)
-    QuickJumpButton.Position = UDim2.new(0.65, 148, 0.16, 0); QuickJumpButton.Size = UDim2.new(0, 60, 0, 60)
-    QuickJumpButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40); QuickJumpButton.Text = "🦘"; QuickJumpButton.TextSize = 26; QuickJumpButton.Font = Enum.Font.SourceSansBold
+    QuickJumpButton.Position = UDim2.new(0.70, 0, 0.16, 0); QuickJumpButton.Size = UDim2.new(0, 64, 0, 64)
+    QuickJumpButton.BackgroundColor3 = Color3.fromRGB(15, 15, 25); QuickJumpButton.Text = "🦘"; QuickJumpButton.TextSize = 30; QuickJumpButton.Font = Enum.Font.FredokaOne
     makeDraggable(QuickJumpButton)
-    Instance.new("UICorner", QuickJumpButton).CornerRadius = UDim.new(0, 14)
+    Instance.new("UICorner", QuickJumpButton).CornerRadius = UDim.new(0, 20)
     local QuickJumpStroke = Instance.new("UIStroke", QuickJumpButton)
-    QuickJumpStroke.Thickness = 2
+    QuickJumpStroke.Thickness = 3; QuickJumpStroke.Color = Color3.fromRGB(168, 85, 247)
 
-    -- HÀM TẠO NÚT TOGGLE TRONG MENU
-    local function AddButton(TextName, ConfigKey, CustomFunc)
+    -- HÀM TẠO NÚT TOGGLE CAO CẤP
+    local function AddButton(TextName, ConfigKey, Icon, CustomFunc)
         local Btn = Instance.new("TextButton", Scroll)
-        Btn.Size = UDim2.new(1, 0, 0, 40)
-        Btn.BackgroundColor3 = Config[ConfigKey] and Color3.fromRGB(138, 43, 226) or Color3.fromRGB(40, 40, 40)
-        Btn.Text = TextName .. " : " .. (Config[ConfigKey] and "ON" or "OFF")
-        Btn.TextColor3 = Color3.fromRGB(255, 255, 255); Btn.Font = Enum.Font.FredokaOne; Btn.TextSize = 14
-        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 8)
+        Btn.Size = UDim2.new(1, 0, 0, 46)
+        Btn.BackgroundColor3 = Config[ConfigKey] and Color3.fromRGB(147, 51, 234) or Color3.fromRGB(24, 24, 38)
+        Btn.Text = Icon .. "  " .. TextName .. "  [" .. (Config[ConfigKey] and "ON 🟢" or "OFF 🔴") .. "]"
+        Btn.TextColor3 = Color3.fromRGB(255, 255, 255); Btn.Font = Enum.Font.FredokaOne; Btn.TextSize = 13.5
+        Instance.new("UICorner", Btn).CornerRadius = UDim.new(0, 12)
+
+        local BtnStroke = Instance.new("UIStroke", Btn)
+        BtnStroke.Color = Config[ConfigKey] and Color3.fromRGB(236, 201, 255) or Color3.fromRGB(45, 45, 65)
+        BtnStroke.Thickness = 1.5
 
         Btn.MouseButton1Click:Connect(function()
             Config[ConfigKey] = not Config[ConfigKey]
-            Btn.BackgroundColor3 = Config[ConfigKey] and Color3.fromRGB(138, 43, 226) or Color3.fromRGB(40, 40, 40)
-            Btn.Text = TextName .. " : " .. (Config[ConfigKey] and "ON" or "OFF")
+            
+            TweenService:Create(Btn, TweenInfo.new(0.25), {
+                BackgroundColor3 = Config[ConfigKey] and Color3.fromRGB(147, 51, 234) or Color3.fromRGB(24, 24, 38)
+            }):Play()
+
+            BtnStroke.Color = Config[ConfigKey] and Color3.fromRGB(236, 201, 255) or Color3.fromRGB(45, 45, 65)
+            Btn.Text = Icon .. "  " .. TextName .. "  [" .. (Config[ConfigKey] and "ON 🟢" or "OFF 🔴") .. "]"
+            
             if CustomFunc then CustomFunc(Config[ConfigKey]) end
         end)
     end
 
-    -- HÀM TẠO TEXTBOX NHẬP TỐC ĐỘ
+    -- HÀM TẠO TEXTBOX NHẬP TỐC ĐỘ SANG TRỌNG
     local function AddTextBox(TextName, DefaultVal, Callback)
         local Frame = Instance.new("Frame", Scroll)
-        Frame.Size = UDim2.new(1, 0, 0, 42)
-        Frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-        Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 8)
+        Frame.Size = UDim2.new(1, 0, 0, 46)
+        Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 32)
+        Instance.new("UICorner", Frame).CornerRadius = UDim.new(0, 12)
+        local FrameStroke = Instance.new("UIStroke", Frame)
+        FrameStroke.Color = Color3.fromRGB(45, 45, 65); FrameStroke.Thickness = 1.5
 
         local Label = Instance.new("TextLabel", Frame)
-        Label.Size = UDim2.new(0.6, 0, 1, 0); Label.Position = UDim2.new(0, 10, 0, 0)
-        Label.BackgroundTransparency = 1; Label.Text = TextName; Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-        Label.Font = Enum.Font.FredokaOne; Label.TextSize = 13; Label.TextXAlignment = Enum.TextXAlignment.Left
+        Label.Size = UDim2.new(0.62, 0, 1, 0); Label.Position = UDim2.new(0, 12, 0, 0)
+        Label.BackgroundTransparency = 1; Label.Text = "⚡ " .. TextName; Label.TextColor3 = Color3.fromRGB(240, 240, 255)
+        Label.Font = Enum.Font.FredokaOne; Label.TextSize = 13.5; Label.TextXAlignment = Enum.TextXAlignment.Left
 
         local Box = Instance.new("TextBox", Frame)
-        Box.Size = UDim2.new(0.35, -10, 0.7, 0); Box.Position = UDim2.new(0.65, 0, 0.15, 0)
-        Box.BackgroundColor3 = Color3.fromRGB(20, 20, 20); Box.Text = tostring(DefaultVal)
-        Box.TextColor3 = Color3.fromRGB(138, 43, 226); Box.Font = Enum.Font.FredokaOne; Box.TextSize = 14
-        Instance.new("UICorner", Box).CornerRadius = UDim.new(0, 6)
+        Box.Size = UDim2.new(0.32, -8, 0.68, 0); Box.Position = UDim2.new(0.68, -4, 0.16, 0)
+        Box.BackgroundColor3 = Color3.fromRGB(10, 10, 18); Box.Text = tostring(DefaultVal)
+        Box.TextColor3 = Color3.fromRGB(216, 180, 254); Box.Font = Enum.Font.FredokaOne; Box.TextSize = 14
+        Instance.new("UICorner", Box).CornerRadius = UDim.new(0, 8)
+        local BoxStroke = Instance.new("UIStroke", Box)
+        BoxStroke.Color = Color3.fromRGB(168, 85, 247); BoxStroke.Thickness = 1.2
 
         Box.FocusLost:Connect(function()
             local num = tonumber(Box.Text)
-            if num then
-                Callback(num)
-            else
-                Box.Text = tostring(Config.SpeedValue)
-            end
+            if num then Callback(num) else Box.Text = tostring(Config.SpeedValue) end
         end)
     end
 
-    -- TẠO CÁC TÍNH NĂNG TRÊN MENU
-    AddButton("Tăng Tốc Độ (Speed Boost)", "SpeedEnabled")
-    AddTextBox("Tốc Độ (Speed Value)", Config.SpeedValue, function(val)
-        Config.SpeedValue = val
-    end)
-    AddButton("Potar Jump (Auto Bhop)", "PotarJumpEnabled")
-    AddButton("Hiện ESP Xuyên Tường", "EspEnabled", function(state)
+    -- DANH SÁCH CHỨC NĂNG
+    AddButton("Tăng Tốc Độ", "SpeedEnabled", "🚀")
+    AddTextBox("Tốc Độ Chạy", Config.SpeedValue, function(val) Config.SpeedValue = val end)
+    AddButton("Potar Jump (Auto Bhop)", "PotarJumpEnabled", "🐰")
+    AddButton("ESP Xuyên Tường", "EspEnabled", "👁️", function(state)
         if not state then
             for _, v in pairs(workspace:GetDescendants()) do
-                if v.Name == "GhostESP" and v:IsA("Highlight") then
-                    v:Destroy()
-                end
+                if v.Name == "GhostESP" and v:IsA("Highlight") then v:Destroy() end
             end
         end
     end)
-    AddButton("Đường Kẻ Tracer (Top)", "TracersEnabled", function(state)
+    AddButton("Đường Kẻ Tracer (Top)", "TracersEnabled", "📍", function(state)
         if not state then
-            for _, line in pairs(ActiveTracers) do
-                pcall(function() line:Remove() end)
-            end
+            for _, line in pairs(ActiveTracers) do pcall(function() line:Remove() end) end
             ActiveTracers = {}
         end
     end)
-    AddButton("Nhìn Trong Tối (Full Bright)", "FullBright", function(state)
+    AddButton("Nhìn Trong Tối (Full Bright)", "FullBright", "💡", function(state)
         Lighting.Brightness = state and 2 or 1
         Lighting.ClockTime = state and 14 or 12
     end)
 
-    -- SỰ KIỆN CLICK NÚT 👻 MỞ BẢNG
+    -- SỰ KIỆN NÚT 👻 MỞ BẢNG
     ToggleButton.MouseButton1Click:Connect(function()
         MainFrame.Visible = not MainFrame.Visible
     end)
 
-    -- NÚT CHUỘT TÚI 🦘 (TOGGLE BẬT/TẮT)
+    -- NÚT CHUỘT TÚI 🦘 TOGGLE
     QuickJumpButton.MouseButton1Click:Connect(function()
         Config.CamJumpEnabled = not Config.CamJumpEnabled
         if Config.CamJumpEnabled then
-            QuickJumpButton.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+            QuickJumpButton.BackgroundColor3 = Color3.fromRGB(147, 51, 234)
         else
-            QuickJumpButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            QuickJumpButton.BackgroundColor3 = Color3.fromRGB(15, 15, 25)
         end
     end)
 
-    -- VIỀN RGB 7 MÀU
+    -- VIỀN NEON CHUYỂN MÀU
     task.spawn(function()
         while task.wait() do
-            for hue = 0, 1, 0.01 do
-                QuickJumpStroke.Color = Color3.fromHSV(hue, 1, 1)
-                task.wait(0.03)
+            for hue = 0, 1, 0.008 do
+                local color = Color3.fromHSV(hue, 0.75, 1)
+                MainStroke.Color = color
+                ToggleStroke.Color = color
+                QuickJumpStroke.Color = color
+                task.wait(0.02)
             end
         end
     end)
 
-    -- VÒNG LẶP CẬP NHẬT ESP HIGHLIGHT
+    -- VÒNG LẶP ESP
     task.spawn(function()
         while task.wait(1) do
             if Config.EspEnabled then
@@ -215,9 +222,9 @@ local success, err = pcall(function()
                         if not v:FindFirstChild("GhostESP") then
                             local hl = Instance.new("Highlight")
                             hl.Name = "GhostESP"
-                            hl.FillColor = Color3.fromRGB(255, 0, 0)
+                            hl.FillColor = Color3.fromRGB(168, 85, 247)
                             hl.OutlineColor = Color3.fromRGB(255, 255, 255)
-                            hl.FillTransparency = 0.5
+                            hl.FillTransparency = 0.4
                             hl.OutlineTransparency = 0
                             hl.Parent = v
                         end
@@ -227,7 +234,7 @@ local success, err = pcall(function()
         end
     end)
 
-    -- LOGIC CẬP NHẬT ĐƯỜNG KẺ TRACER & DI CHUYỂN
+    -- LOGIC DI CHUYỂN & TRACERS
     RunService.RenderStepped:Connect(function()
         local char = LocalPlayer.Character
         if char then
@@ -235,12 +242,8 @@ local success, err = pcall(function()
             local hrp = char:FindFirstChild("HumanoidRootPart")
             
             if hum and hrp then
-                -- 1. WalkSpeed chỉ đổi khi bật nút Speed Boost
-                if Config.SpeedEnabled then
-                    hum.WalkSpeed = Config.SpeedValue
-                end
+                if Config.SpeedEnabled then hum.WalkSpeed = Config.SpeedValue end
 
-                -- 2. Potar Jump dùng tốc độ ô Textbox
                 if Config.PotarJumpEnabled and hum.MoveDirection.Magnitude > 0 then
                     if hum.FloorMaterial ~= Enum.Material.Air then
                         hum:ChangeState(Enum.HumanoidStateType.Jumping)
@@ -249,11 +252,8 @@ local success, err = pcall(function()
                     end
                 end
 
-                -- 3. Nút 🦘 (Cam Jump Toggle) dùng tốc độ ô Textbox
                 if Config.CamJumpEnabled then
-                    if hum.FloorMaterial ~= Enum.Material.Air then
-                        hum:ChangeState(Enum.HumanoidStateType.Jumping)
-                    end
+                    if hum.FloorMaterial ~= Enum.Material.Air then hum:ChangeState(Enum.HumanoidStateType.Jumping) end
                     local camLook = Camera.CFrame.LookVector
                     local moveDir = Vector3.new(camLook.X, 0, camLook.Z).Unit
                     hrp.AssemblyLinearVelocity = Vector3.new(moveDir.X * Config.SpeedValue, hrp.AssemblyLinearVelocity.Y, moveDir.Z * Config.SpeedValue)
@@ -261,7 +261,7 @@ local success, err = pcall(function()
             end
         end
 
-        -- XỬ LÝ VẼ ĐƯỜNG TRACER (TOP-CENTER) DỌN RÁC TỰ ĐỘNG
+        -- TRACERS (TOP-CENTER)
         if Config.TracersEnabled and Drawing then
             for model, line in pairs(ActiveTracers) do
                 if not model or not model.Parent or not model:FindFirstChildOfClass("Humanoid") then
@@ -279,8 +279,8 @@ local success, err = pcall(function()
                             local line = ActiveTracers[v]
                             if not line then
                                 line = Drawing.new("Line")
-                                line.Thickness = 1.5
-                                line.Color = Color3.fromRGB(0, 255, 255)
+                                line.Thickness = 2
+                                line.Color = Color3.fromRGB(216, 180, 254)
                                 line.Transparency = 1
                                 ActiveTracers[v] = line
                             end
@@ -294,9 +294,7 @@ local success, err = pcall(function()
                 end
             end
         else
-            for _, line in pairs(ActiveTracers) do
-                line.Visible = false
-            end
+            for _, line in pairs(ActiveTracers) do line.Visible = false end
         end
     end)
 end)
@@ -305,20 +303,19 @@ end)
 if success then
     pcall(function()
         game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "★ mrghost hub ★",
-            Text = "Đã kích hoạt Full Light thành công!",
+            Title = "★ MRGHOST HUB VIP ★",
+            Text = "✨ Đã kích hoạt Giao Diện Super Light thành công!",
             Duration = 5
         })
     end)
-    print("[★ mrghost hub ★] Loaded successfully on all clients!")
+    print("[★ MRGHOST HUB VIP ★] Loaded successfully!")
 else
     pcall(function()
         game:GetService("StarterGui"):SetCore("SendNotification", {
-            Title = "★ mrghost hub ★",
+            Title = "★ MRGHOST HUB ★",
             Text = "script ko hoạt động đc",
             Duration = 5
         })
     end)
-    warn("[★ mrghost hub ★] Load failed: " .. tostring(err))
+    warn("[★ MRGHOST HUB ★] Load failed: " .. tostring(err))
 end
- 
