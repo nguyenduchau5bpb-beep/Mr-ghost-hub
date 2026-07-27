@@ -33,7 +33,7 @@ local function SaveKey24H(key)
     end
 end
 
--- [[ 2. HÀM TẠO THÔNG BÁO CYBER NOTIFY ĐẲNG CẤP ]]
+-- [[ 2. HÀM TẠO THÔNG BÁO CYBER NOTIFY ]]
 local function SendCyberNotify(titleText, descText, duration, isSuccess)
     task.spawn(function()
         local NotifyGui = CoreGui:FindFirstChild("MrGhostNotifyGui")
@@ -113,7 +113,7 @@ local function SendCyberNotify(titleText, descText, duration, isSuccess)
     end)
 end
 
--- [[ 3. SCRIPT CHÍNH (GIAO DIỆN CHÍNH SIÊU ĐẸP) ]]
+-- [[ 3. SCRIPT CHÍNH ]]
 local function LoadMainScript()
     SendCyberNotify("PROJECT TTTT 👑", "🔥 Cyber System đã kết nối! Chúc ông chơi vui vẻ!", 3.5, true)
 
@@ -177,7 +177,6 @@ local function LoadMainScript()
     local DefaultPosQuickJump = UDim2.new(0.70, 0, 0.16, 0)
     local DefaultPosMainFrame = UDim2.new(0.32, 0, 0.16, 0)
 
-    -- NÚT MỞ MENU ĐẸP LUNG LINH
     local ToggleButton = Instance.new("TextButton", ScreenGui)
     ToggleButton.Position = DefaultPosToggle; ToggleButton.Size = UDim2.new(0, 62, 0, 62)
     ToggleButton.BackgroundColor3 = Color3.fromRGB(15, 12, 28); ToggleButton.Text = "👑✨"; ToggleButton.TextSize = 28; ToggleButton.Font = Enum.Font.FredokaOne
@@ -186,7 +185,6 @@ local function LoadMainScript()
     local ToggleStroke = Instance.new("UIStroke", ToggleButton)
     ToggleStroke.Thickness = 3; ToggleStroke.Color = Color3.fromRGB(192, 132, 252)
 
-    -- KHUNG MENU CHÍNH
     local MainFrame = Instance.new("Frame", ScreenGui)
     MainFrame.Position = DefaultPosMainFrame; MainFrame.Size = UDim2.new(0, 360, 0, 470)
     MainFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 18); MainFrame.BackgroundTransparency = 0.08; MainFrame.Visible = true
@@ -195,7 +193,6 @@ local function LoadMainScript()
     local MainStroke = Instance.new("UIStroke", MainFrame)
     MainStroke.Color = Color3.fromRGB(192, 132, 252); MainStroke.Thickness = 2.5
 
-    -- HEADER CỰC "CHẤT" CHO TTTT
     local TitleFrame = Instance.new("Frame", MainFrame)
     TitleFrame.Size = UDim2.new(1, 0, 0, 65); TitleFrame.BackgroundTransparency = 1
 
@@ -205,7 +202,7 @@ local function LoadMainScript()
 
     local SubTitle = Instance.new("TextLabel", TitleFrame)
     SubTitle.Position = UDim2.new(0, 0, 0.62, 0); SubTitle.Size = UDim2.new(1, 0, 0.38, 0); SubTitle.BackgroundTransparency = 1
-    SubTitle.Text = "━━━━ 👑 SYSTEM POWERED BY TTTT 👑 ━━━━"; SubTitle.TextColor3 = Color3.fromRGB(192, 132, 252); SubTitle.TextSize = 11; SubTitle.Font = Enum.Font.FredokaOne
+    SubTitle.Text = "━━━━ 👑 SYSTEM POWERED BY TTTT ━━━━"; SubTitle.TextColor3 = Color3.fromRGB(192, 132, 252); SubTitle.TextSize = 11; SubTitle.Font = Enum.Font.FredokaOne
 
     local Scroll = Instance.new("ScrollingFrame", MainFrame)
     Scroll.Size = UDim2.new(1, -28, 1, -80); Scroll.Position = UDim2.new(0, 14, 0, 70)
@@ -332,7 +329,6 @@ local function LoadMainScript()
         QuickJumpButton.BackgroundColor3 = Config.CamJumpEnabled and Color3.fromRGB(147, 51, 234) or Color3.fromRGB(15, 12, 28)
     end)
 
-    -- HIỆU ỨNG RAINBOW LED CHUYỂN MÀU MƯỢT MÀ
     task.spawn(function()
         while task.wait() do
             for hue = 0, 1, 0.006 do
@@ -426,7 +422,7 @@ local function LoadMainScript()
                         line.From = Vector2.new(Camera.ViewportSize.X / 2, 0)
                         line.To = Vector2.new(screenPos.X, screenPos.Y)
                         line.Visible = true
-                    elseif ActiveTracers[v] then
+                    elseif ActiveTracers[v] me
                         ActiveTracers[v].Visible = false
                     end
                 end
@@ -437,7 +433,7 @@ local function LoadMainScript()
     end)
 end
 
--- [[ 4. GIAO DIỆN KEY SYSTEM CYBER VIP (KEY: TTTT) ]]
+-- [[ 4. GIAO DIỆN KEY SYSTEM CHE LỘ KEY (KEY CHUẨN: TTTT) ]]
 if IsKeyValid() then
     LoadMainScript()
 else
@@ -457,7 +453,6 @@ else
     KeyStroke.Color = Color3.fromRGB(192, 132, 252)
     KeyStroke.Thickness = 2.5
 
-    -- Rainbow LED cho Key UI
     task.spawn(function()
         while task.wait() do
             for hue = 0, 1, 0.01 do
@@ -522,12 +517,12 @@ else
         end
     end)
 
-    -- Ô NHẬP KEY
+    -- Ô NHẬP KEY (ĐÃ GIẤU KEY HOÀN TOÀN TẠI ĐÂY)
     local KeyBox = Instance.new("TextBox", KeyFrame)
     KeyBox.Position = UDim2.new(0.08, 0, 0.56, 0)
     KeyBox.Size = UDim2.new(0.84, 0, 0, 40)
     KeyBox.BackgroundColor3 = Color3.fromRGB(20, 20, 34)
-    KeyBox.PlaceholderText = "Nhập Key TTTT tại đây..."
+    KeyBox.PlaceholderText = "Nhập Key VIP tại đây..." -- Giấu kín Key!
     KeyBox.Text = ""
     KeyBox.TextColor3 = Color3.fromRGB(255, 255, 255)
     KeyBox.Font = Enum.Font.FredokaOne
