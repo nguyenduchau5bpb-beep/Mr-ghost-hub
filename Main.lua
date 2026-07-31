@@ -1,5 +1,5 @@
 -- =======================================================
--- 👑 MRGHOST HUB - ULTRA VVIP TTTT EDITION
+-- 👑 MRGHOST HUB - ULTRA VVIP TTTT EDITION (EVENT AUTO COLLECT)
 -- =======================================================
 local MY_PERMANENT_KEY = "TTTT"
 local DISCORD_LINK = "https://discord.gg/xSECFRv9s"
@@ -115,7 +115,7 @@ end
 
 -- [[ 3. MAIN SCRIPT VVIP ]]
 local function LoadMainScript()
-    SendCyberNotify("MRGHOST ULTRA VIP 👑", "🔥 Cyber System đã kết nối! Quậy bung màn hình!", 3.5, true)
+    SendCyberNotify("MRGHOST ULTRA VIP 👑", "🔥 Đã kích hoạt tính năng Auto Nhặt Đồ Sự Kiện!", 3.5, true)
 
     pcall(function()
         if CoreGui:FindFirstChild("MrGhostHubVIP") then CoreGui.MrGhostHubVIP:Destroy() end
@@ -139,9 +139,11 @@ local function LoadMainScript()
         EspEnabled = false,
         TracersEnabled = false,
         CamJumpEnabled = false,
+        AutoCollect = false,
+        FovEnabled = false,
         SpeedValue = 45,
         JumpSpeedValue = 60,
-        FovValue = 70
+        FovValue = 90
     }
 
     local ActiveTracers = {}
@@ -283,7 +285,7 @@ local function LoadMainScript()
         Box.FocusLost:Connect(function()
             local num = tonumber(Box.Text)
             if num then
-                if num > 1000 then num = 1000 end
+                if num > 120 then num = 120 end
                 Box.Text = tostring(num)
                 Config[ConfigKey] = num
                 if Callback then Callback(num) end
@@ -291,10 +293,13 @@ local function LoadMainScript()
         end)
     end
 
+    -- CHỨC NĂNG CÀY SỰ KIỆN MỚI
+    AddButton("Auto Nhặt Đồ Sự Kiện", "AutoCollect", "🎁✨")
+    AddButton("Bật Khóa FOV Rộng", "FovEnabled", "🔍")
+    AddTextBox("Góc Nhìn FOV", "FovValue", "⚙️")
     AddButton("Tăng Tốc Độ Chạy", "SpeedEnabled", "🚀💨")
     AddTextBox("Tốc Độ Chạy", "SpeedValue", "⚡")
     AddTextBox("Tốc Độ Jump", "JumpSpeedValue", "🦘✨")
-    AddTextBox("Chỉnh FOV Máy Tính", "FovValue", "🔍", function(val) Camera.FieldOfView = val end)
     AddButton("Potar Jump (Auto Bhop)", "PotarJumpEnabled", "🐰💨")
     AddButton("ESP Xuyên Tường", "EspEnabled", "👁️‍🗨️", function(state)
         if not state then
@@ -341,6 +346,32 @@ local function LoadMainScript()
                 local color = Color3.fromHSV(hue, 0.7, 1)
                 MainStroke.Color = color; ToggleStroke.Color = color; QuickJumpStroke.Color = color
                 task.wait(0.02)
+            end
+        end
+    end)
+
+    -- SCRIPT TỰ ĐỘNG NHẶT VẬT PHẨM SỰ KIỆN QUANH BẢN ĐỒ
+    task.spawn(function()
+        while task.wait(0.1) do
+            if Config.AutoCollect then
+                pcall(function()
+                    local char = LocalPlayer.Character
+                    if char and char:FindFirstChild("HumanoidRootPart") then
+                        local hrp = char.HumanoidRootPart
+                        for _, obj in pairs(workspace:GetDescendants()) do
+                            if Config.AutoCollect and (obj:IsA("Tool") or obj:IsA("TouchTransmitter") or obj:FindFirstChildOfClass("TouchTransmitter")) then
+                                local targetPart = obj:IsA("BasePart") and obj or obj.Parent:FindFirstChildWhichIsA("BasePart")
+                                if targetPart and not targetPart:IsDescendantOf(char) then
+                                    local dist = (hrp.Position - targetPart.Position).Magnitude
+                                    if dist <= 80 then -- Phạm vi hút đồ 80 studs
+                                        firetouchinterest(hrp, targetPart, 0)
+                                        firetouchinterest(hrp, targetPart, 1)
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end)
             end
         end
     end)
@@ -403,7 +434,12 @@ local function LoadMainScript()
         end
     end)
 
+    -- HÀM LẮP FOV LIÊN TỤC CHỐNG GAME KHÓA GÓC NHÌN
     RunService.RenderStepped:Connect(function()
+        if Config.FovEnabled then
+            Camera.FieldOfView = Config.FovValue
+        end
+
         if Config.TracersEnabled and Drawing then
             for model, line in pairs(ActiveTracers) do
                 if not model or not model.Parent or not model:FindFirstChildOfClass("Humanoid") then
@@ -439,7 +475,7 @@ local function LoadMainScript()
     end)
 end
 
--- [[ 4. GIAO DIỆN KEY VVIP (CÓ NÚT PASTE AUTO ACTIVATE) ]]
+-- [[ 4. GIAO DIỆN KEY VVIP ]]
 if IsKeyValid() then
     LoadMainScript()
 else
@@ -487,7 +523,6 @@ else
     KeySub.Font = Enum.Font.SourceSansBold
     KeySub.TextSize = 12.5
 
-    -- NÚT 1: DISCORD
     local DiscordBtn = Instance.new("TextButton", KeyFrame)
     DiscordBtn.Position = UDim2.new(0.08, 0, 0.20, 0)
     DiscordBtn.Size = UDim2.new(0.84, 0, 0, 36)
@@ -505,7 +540,6 @@ else
         end
     end)
 
-    -- NÚT 2: GOOGLE (FNOTE)
     local GgBtn = Instance.new("TextButton", KeyFrame)
     GgBtn.Position = UDim2.new(0.08, 0, 0.34, 0)
     GgBtn.Size = UDim2.new(0.84, 0, 0, 36)
@@ -523,7 +557,6 @@ else
         end
     end)
 
-    -- Ô NHẬP KEY (CHE KÍN KEY)
     local KeyBox = Instance.new("TextBox", KeyFrame)
     KeyBox.Position = UDim2.new(0.08, 0, 0.50, 0)
     KeyBox.Size = UDim2.new(0.84, 0, 0, 38)
@@ -537,7 +570,6 @@ else
     local BoxStroke = Instance.new("UIStroke", KeyBox)
     BoxStroke.Color = Color3.fromRGB(60, 60, 90)
 
-    -- NÚT DÁN KEY TỰ ĐỘNG (AUTO PASTE XỊN)
     local PasteBtn = Instance.new("TextButton", KeyFrame)
     PasteBtn.Position = UDim2.new(0.08, 0, 0.65, 0)
     PasteBtn.Size = UDim2.new(0.84, 0, 0, 34)
@@ -556,7 +588,6 @@ else
         end
     end)
 
-    -- NÚT XÁC NHẬN
     local SubmitBtn = Instance.new("TextButton", KeyFrame)
     SubmitBtn.Position = UDim2.new(0.08, 0, 0.78, 0)
     SubmitBtn.Size = UDim2.new(0.84, 0, 0, 42)
